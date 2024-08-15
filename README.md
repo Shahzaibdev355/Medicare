@@ -5,3 +5,7 @@
 ![image](https://github.com/user-attachments/assets/8502fbfe-6e99-4216-8c7f-e91e5ebb9c1a)
 
 ![image](https://github.com/user-attachments/assets/8446f1f6-2cd8-4cea-a2fa-66150407b8a8)
+
+
+# Mobile View:
+![image](https://github.com/user-attachments/assets/c5ba55d5-68c4-4599-9013-8bba738e2b58)

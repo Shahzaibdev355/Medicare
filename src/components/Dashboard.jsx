@@ -26,6 +26,8 @@ import {
 import { Link, Outlet } from "react-router-dom";
 import Profile from "./Profile";
 
+import Main from "./Main";
+
 const Dasboard = () => {
   const [dashboardHidden, setDashboardHidden] = useState(true);
 
@@ -121,51 +123,12 @@ const Dasboard = () => {
 
   let [profileDivOpen, setprofileDivOpen] = useState(false);
 
-  const scrollbarRef = useRef(null);
-  useEffect(() => {
-    const options = {
-      damping: 0.1, // Adjust this value to control the smoothness
-    };
-
-    const initScrollbar = () => {
-      if (window.innerWidth >= 768) {
-        // Initialize custom scrollbar only on desktop
-        if (scrollbarRef.current) {
-          Scrollbar.init(scrollbarRef.current, options);
-        }
-      } else {
-        // Ensure the native scroll is active by setting overflow to auto
-        if (scrollbarRef.current) {
-          scrollbarRef.current.style.overflow = "auto";
-        }
-      }
-    };
-
-    // Initialize scrollbar on first load
-    initScrollbar();
-
-    // Cleanup function to destroy scrollbar on unmount or resize
-    const destroyScrollbar = () => {
-      if (scrollbarRef.current) {
-        Scrollbar.destroy(scrollbarRef.current);
-        scrollbarRef.current.style.overflow = "auto"; // Re-enable native scrolling
-      }
-    };
-
-    const handleResize = () => {
-      destroyScrollbar();
-      initScrollbar();
-    };
-
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup on unmount
-    return () => {
-      destroyScrollbar();
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  // Add this function inside your component
+  function handleLinkClick() {
+    if (window.innerWidth <= 1080 && sidebarOpen) {
+      handleToggleClick(); // Close the sidebar
+    }
+  }
 
   return (
     <>
@@ -544,7 +507,7 @@ const Dasboard = () => {
                           onMouseEnter={handleMouseEnter}
                           onMouseLeave={handleMouseLeave}
                         >
-                          <li className="nav-item dashboard-2-nav-item">
+                          <li className="nav-item dashboard-2-nav-item" onClick={handleLinkClick}>
                             <Link
                               to="/"
                               id="dashboard2-nav-item-link"
@@ -562,7 +525,7 @@ const Dasboard = () => {
                               </span>
                             </Link>
                           </li>
-                          <li className="nav-item dashboard-2-nav-item">
+                          <li className="nav-item dashboard-2-nav-item" onClick={handleLinkClick}>
                             <Link
                               to="/appointment"
                               id="dashboard2-nav-item-link"
@@ -583,9 +546,9 @@ const Dasboard = () => {
                               </span>
                             </Link>
                           </li>
-                          <li className="nav-item dashboard-2-nav-item">
-                            <a
-                              href="invoice.html"
+                          <li className="nav-item dashboard-2-nav-item" onClick={handleLinkClick}>
+                            <Link
+                              to="/medical-bills"
                               id="dashboard2-nav-item-link"
                               className="dashboard-2-nav-item-link"
                             >
@@ -602,11 +565,11 @@ const Dasboard = () => {
                               >
                                 Medical Bills
                               </span>
-                            </a>
+                            </Link>
                           </li>
-                          <li className="nav-item dashboard-2-nav-item">
-                            <a
-                              href="invoice.html"
+                          <li className="nav-item dashboard-2-nav-item" onClick={handleLinkClick}>
+                            <Link
+                              to="/medical-records"
                               id="dashboard2-nav-item-link"
                               className="dashboard-2-nav-item-link"
                             >
@@ -623,12 +586,12 @@ const Dasboard = () => {
                               >
                                 Medical Records
                               </span>
-                            </a>
+                            </Link>
                           </li>
 
-                          <li className="nav-item dashboard-2-nav-item">
-                            <a
-                              href="invoice.html"
+                          <li className="nav-item dashboard-2-nav-item" onClick={handleLinkClick}>
+                            <Link
+                              to="/medications"
                               id="dashboard2-nav-item-link"
                               className="dashboard-2-nav-item-link"
                             >
@@ -645,13 +608,13 @@ const Dasboard = () => {
                               >
                                 Medications
                               </span>
-                            </a>
+                            </Link>
                           </li>
 
                           <div className="dasboard2-logout-link">
                             <li className="nav-item dashboard-2-nav-item">
                               <a
-                                href="invoice.html"
+                                href="#"
                                 id="dashboard2-nav-item-link"
                                 className="dashboard-2-nav-item-link"
                               >
@@ -672,7 +635,7 @@ const Dasboard = () => {
                             </li>
                             <li className="nav-item dashboard-2-nav-item">
                               <a
-                                href="invoice.html"
+                                href="#"
                                 id="dashboard2-nav-item-link"
                                 className="dashboard-2-nav-item-link"
                               >
@@ -701,7 +664,6 @@ const Dasboard = () => {
 
                   <div
                     id="dashboard-2-column2"
-                    ref={scrollbarRef}
                     className=" dashboard-2-column2 px-0"
                     style={{ display: "" }}
                   >
@@ -712,11 +674,7 @@ const Dasboard = () => {
                           className="section"
                           style={{ paddingTop: 10, paddingBottom: 20 }}
                         >
-                          {/* <div className="container-fluid"> */}
-
-                          <Profile />
-
-                          {/* </div> */}
+                          <Main />
                         </section>
                       </main>
                     </div>

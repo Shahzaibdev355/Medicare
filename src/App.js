@@ -1,7 +1,9 @@
 import React from "react";
 
 import{ BrowserRouter, Route, Routes } from "react-router-dom"
-import Main from "./components/Main";
+
+
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -10,7 +12,7 @@ function App() {
 
         <Routes>
 
-          <Route path="/*" element={<Main/>}></Route>
+          <Route path="/*" element={<Dashboard/>}></Route>
 
         </Routes>
       
